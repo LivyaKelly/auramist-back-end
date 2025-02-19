@@ -1,3 +1,34 @@
-node_modules
-# Keep environment variables out of version control
+# Node modules
+node_modules/
+
+# Arquivos de ambiente (variáveis sensíveis)
 .env
+.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Diretórios de build e cache
+dist/
+build/
+.cache/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Diretórios gerados pelo Prisma
+prisma/migrations/
+prisma/dev.db
+
+# Outros arquivos temporários
+*.tmp
+*.swp
+
+# Dependências específicas de IDE
+.vscode/
+.idea/
