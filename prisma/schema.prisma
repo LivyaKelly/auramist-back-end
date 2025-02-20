@@ -33,6 +33,14 @@ model Review {
   createdAt DateTime @default(now())
   client    User     @relation(fields: [clientId], references: [id])
 }
+model Service {
+  id             Int    @id @default(autoincrement())
+  name           String
+  description    String
+  duration       Int     
+  price          Float
+  professionalId Int
+}
 
 enum Role {
   CLIENT
