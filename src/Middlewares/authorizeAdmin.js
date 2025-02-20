@@ -1,4 +1,3 @@
-// src/middlewares/authorizeAdmin.js
 export function authorizeAdmin(req, res, next) {
     
     if (req.userRole && req.userRole === 'ADMIN') {

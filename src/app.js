@@ -1,11 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import logger from './Middlewares/logger.js'; 
-import verifyToken from './Middlewares/verifyToken.js'; 
+import logger from './middlewares/logger.js'; 
+import verifyToken from './middlewares/verifyToken.js'; 
 import authRoutes from './routes/auth.js'; 
-import userRoutes from './routes/users.js'; 
+import userRoutes from './routes/usersRoutes.js'; 
 import adminRoutes from './routes/adminRoutes.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config(); 
 
@@ -14,12 +15,13 @@ const app = express();
 app.use(express.json()); 
 app.use(cors()); 
 app.use(logger); 
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cookieParser());  
 
-// Rotas da API
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
-app.use('/auth', authRoutes);
-app.use('/admins', adminRoutes);
+app.use('/api/admins', adminRoutes);
 
 
 app.get('/api/protected', verifyToken, (req, res) => {

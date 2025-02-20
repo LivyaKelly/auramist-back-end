@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
+
+
 export async function addAdmin(req, res) {
   try {
     const { userId } = req.body;
@@ -27,15 +29,20 @@ export async function addAdmin(req, res) {
   }
 }
 
+
+
 export async function listAdmins(req, res) {
   try {
     const admins = await prisma.user.findMany({ where: { role: 'ADMIN' } });
     return res.status(200).json({ mensagem: 'Lista de admins', admins });
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ mensagem: 'Erro ao listar admins', error: err });
+    return res.status(500).json({ mensagem: 'Erro ao listar admins', error: err });
   }
 }
+
+
+
 
 export async function deleteAdmin(req, res) {
   try {
