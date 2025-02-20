@@ -6,10 +6,10 @@ import { PrismaClient } from '@prisma/client';
 const router = express.Router();
 const prisma = new PrismaClient();
 
-// Secret Key para JWT (lembre-se de definir no .env)
+
 const JWT_SECRET = process.env.JWT_SECRET || 'seuSegredoSuperSeguro';
 
-// Registro de Usuário
+
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password, phone, role } = req.body;
@@ -31,7 +31,6 @@ router.post('/register', async (req, res) => {
       },
     });
 
-    // Geração do token JWT
     const token = jwt.sign(
       { userId: user.id, role: user.role }, 
       JWT_SECRET, 
@@ -53,7 +52,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-//Login de Usuário
+
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
