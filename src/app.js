@@ -5,6 +5,7 @@ import logger from './Middlewares/logger.js';
 import verifyToken from './Middlewares/verifyToken.js'; 
 import authRoutes from './router/auth.js'; 
 import userRoutes from './router/users.js'; 
+import serviceRoutes from './router/serviceRoutes.js';
 
 dotenv.config(); 
 
@@ -17,6 +18,7 @@ app.use(logger);
 // Rotas da API
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api', serviceRoutes);
 
 // rota protegida pelo verifyToken
 app.get('/api/protected', verifyToken, (req, res) => {

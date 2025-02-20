@@ -28,3 +28,12 @@ enum Role {
   PROFESSIONAL
   ADMIN
 }
+
+model Service {
+  id             Int    @id @default(autoincrement())
+  name           String
+  description    String
+  duration       Int     
+  price          Float
+  professionalId Int
+}
