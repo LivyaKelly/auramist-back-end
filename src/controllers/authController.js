@@ -8,7 +8,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'a852ee9104d40500d96f001ccece478e8e
 
 export async function register(req, res) {
     try {
-        const { name, email, password, phone, role } = req.body;
+        const { name, email, password, phone, role, hasCompletedService } = req.body;
 
         if (!name || !email || !password) {
             return res.status(400).json({ message: 'Nome, e-mail e senha são obrigatórios.' });
@@ -31,6 +31,7 @@ export async function register(req, res) {
                 password: hashedPassword,
                 phone: phone || null,
                 role: role || 'CLIENT',
+                hasCompletedService: hasCompletedService !== undefined ? hasCompletedService : false,
             },
         });
 

@@ -3,7 +3,11 @@ import { register, login } from '../controllers/authController.js'; // ou authCo
 
 const router = express.Router();
 
+
 router.post('/register', register);
+
+
 router.post('/login', login);
+
 
 export default router;
