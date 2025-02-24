@@ -1,5 +1,5 @@
 import express from 'express';
-import verifyToken from '../Middlewares/verifyToken.js'; // Proteção de rota
+import verifyToken from '../middlewares/verifyToken.js'; // Proteção de rota
 
 const router = express.Router();
 
