@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 
 
-export async function addAdmin(req, res) {
+export async function changeRoleToAdmin(req, res) {
   try {
     const { userId } = req.body;
 
@@ -19,7 +19,7 @@ export async function addAdmin(req, res) {
 
     const updateUser = await prisma.user.update({
       where: { id: userId },
-      data: { role: 'ADMIN' },
+      data: { role: Prisma.UserRole.ADMIN },
     });
 
     return res.status(200).json({ mensagem: 'Usuário promovido a admin', user: updateUser });
@@ -33,7 +33,7 @@ export async function addAdmin(req, res) {
 
 export async function listAdmins(req, res) {
   try {
-    const admins = await prisma.user.findMany({ where: { role: 'ADMIN' } });
+    const admins = await prisma.user.findMany({ where: { role: Prisma.UserRole.ADMIN } });
     return res.status(200).json({ mensagem: 'Lista de admins', admins });
   } catch (err) {
     console.log(err);
@@ -44,7 +44,7 @@ export async function listAdmins(req, res) {
 
 
 
-export async function deleteAdmin(req, res) {
+export async function changeRoleFromAdminToClient(req, res) {
   try {
     const adminId = parseInt(req.params.id, 10);
     const admin = await prisma.user.findUnique({ where: { id: adminId } });
@@ -53,13 +53,13 @@ export async function deleteAdmin(req, res) {
       return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
     }
     
-    if (admin.role !== 'ADMIN') {
+    if (admin.role !== Prisma.UserRole.ADMIN) {
       return res.status(400).json({ mensagem: 'Usuário não é admin' });
     }
 
     const updateUser = await prisma.user.update({
       where: { id: adminId },
-      data: { role: 'CLIENT' },
+      data: { role: Prisma.UserRole.CLIENT },
     });
     return res.status(200).json({ mensagem: 'Usuário removido da lista de admins', user: updateUser });
   } catch (err) {
