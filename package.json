@@ -14,10 +14,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-<<<<<<< HEAD
     "@prisma/client": "^6.3.1",
-=======
->>>>>>> e45fcd42cc52f8d002b4183cf714626f64ad8d6a
     "auramist-back-end": "file:",
     "bcryptjs": "^3.0.1",
     "cookie-parser": "^1.4.7",

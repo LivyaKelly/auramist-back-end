@@ -8,6 +8,7 @@ import userRoutes from './routes/usersRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import cookieParser from 'cookie-parser';
 import reviewRoutes from './routes/reviewRoutes.js';
+import serviceRoutes from './router/serviceRoutes.js';
 
 dotenv.config(); 
 
@@ -27,6 +28,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/admins', adminRoutes);
 
 app.use('/api/reviews', reviewRoutes);
+
+app.use('/api', serviceRoutes);
 
 
 app.get('/api/protected', verifyToken, (req, res) => {
