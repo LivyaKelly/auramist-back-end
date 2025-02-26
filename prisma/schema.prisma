@@ -42,6 +42,24 @@ model Service {
   professionalId Int
 }
 
+enum Status {
+  PENDENTE
+  CONFIRMADO
+  CANCELADO
+}
+
+model Appointment {
+  id             Int    @id @default(autoincrement())
+  userId         Int
+  professionalId Int
+  serviceId      Int
+  date           DateTime
+  time           String
+  status         Status @default(PENDENTE)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
 enum Role {
   CLIENT
   PROFESSIONAL
