@@ -1,12 +1,20 @@
 import express from 'express';
 import { getAllServices, getServiceById, createService, updateService, deleteService, } from '../controllers/serviceController.js';
+import { authorizeService } from '../Middlewares/authorizeService.js';
+import verifyToken from '../middlewares/verifyToken.js';
+
 
 const router = express.Router();
 
+
 router.get('/', getAllServices);
+
 router.get('/:id', getServiceById);
-router.post('/', createService);
-router.put('/:id', updateService);
-router.delete('/:id', deleteService);
+
+router.post('/', verifyToken, authorizeService, createService);
+
+router.put('/:id', verifyToken, authorizeService, updateService);
+
+router.delete('/:id', verifyToken, authorizeService, deleteService);
 
 export default router;

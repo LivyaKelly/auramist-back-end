@@ -30,9 +30,9 @@ app.use('/api/admins', adminRoutes);
 
 app.use('/api/reviews', reviewRoutes);
 
-app.use('/api/serviceRoutes', serviceRoutes);
+app.use('/api/services', serviceRoutes);
 
-app.use('/api/appointmentRoutes', appointmentRoutes);
+app.use('/api/appointments', appointmentRoutes);
 
 
 app.get('/api/protected', verifyToken, (req, res) => {

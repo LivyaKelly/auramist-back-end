@@ -23,6 +23,10 @@ model User {
   hasCompletedService  Boolean  @default(false)
   createdAt            DateTime @default(now())
   reviews              Review[]
+
+  clientAppointments       Appointment[] @relation("ClientAppointments")
+  professionalAppointments Appointment[] @relation("ProfessionalAppointments")
+
 }
 
 model Review {
@@ -33,6 +37,7 @@ model Review {
   createdAt DateTime @default(now())
   client    User     @relation(fields: [clientId], references: [id])
 }
+
 model Service {
   id             Int    @id @default(autoincrement())
   name           String
@@ -40,19 +45,24 @@ model Service {
   duration       Int     
   price          Float
   professionalId Int
+  appointments   Appointment[]
 }
 
 enum Status {
   PENDENTE
   CONFIRMADO
   CANCELADO
+  CONCLUIDO
 }
 
 model Appointment {
   id             Int    @id @default(autoincrement())
-  userId         Int
+  clientId         Int
+  client           User   @relation("ClientAppointments", fields: [clientId], references: [id])
   professionalId Int
+  professional   User   @relation("ProfessionalAppointments", fields: [professionalId], references: [id])
   serviceId      Int
+  service        Service @relation(fields: [serviceId], references: [id])
   date           DateTime
   time           String
   status         Status @default(PENDENTE)
