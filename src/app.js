@@ -16,22 +16,19 @@ dotenv.config();
 const app = express();
 
 app.use(express.json()); 
-app.use(cors()); 
-app.use(logger); 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
-app.use(cookieParser());  
+app.use(cors({ 
+  origin: 'http://localhost:3000',  
+  credentials: true                 
+}));
+app.use(cookieParser());           
+app.use(logger);  
 
 
 app.use('/api/auth', authRoutes);
-
 app.use('/api/users', userRoutes);
-
 app.use('/api/admins', adminRoutes);
-
 app.use('/api/reviews', reviewRoutes);
-
 app.use('/api/services', serviceRoutes);
-
 app.use('/api/appointments', appointmentRoutes);
 
 
@@ -39,7 +36,7 @@ app.get('/api/protected', verifyToken, (req, res) => {
   res.json({ message: `Acesso autorizado para o usuário ${req.userId}, função: ${req.userRole}` });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
