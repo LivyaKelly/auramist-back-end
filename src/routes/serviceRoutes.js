@@ -1,6 +1,6 @@
 import express from 'express';
 import { getAllServices, getServiceById, createService, updateService, deleteService, } from '../controllers/serviceController.js';
-import { authorizeService } from '../Middlewares/authorizeService.js';
+import { authorizeService } from '../middlewares/authorizeService.js';
 import verifyToken from '../middlewares/verifyToken.js';
 
 

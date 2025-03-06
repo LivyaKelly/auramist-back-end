@@ -1,6 +1,6 @@
 import express from 'express';
 import { getAllAppointments, getAppointmentById, createAppointment, updateAppointment, deleteAppointment } from '../controllers/appointmentController.js';
-import { authorizeAppointment } from '../Middlewares/authorizeAppointment.js';
+import { authorizeAppointment } from '../middlewares/authorizeAppointment.js';
 import verifyToken from '../middlewares/verifyToken.js';
 
 
