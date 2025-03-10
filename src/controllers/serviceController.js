@@ -6,10 +6,7 @@ export async function getAllServices(req, res) {
 
     try {
       const services = await prisma.service.findMany();
-      return res.status(200).json({
-        mensagem: 'Lista de serviços',
-        servicos: services
-      });
+      return res.status(200).json(services);
     } catch (err) {
       console.log('Error listing services:', err);
       return res.status(500).json({ mensagem: 'Erro ao buscar serviços', error: err });
@@ -106,7 +103,7 @@ export async function getAllServices(req, res) {
       console.log('Error updating service:', err);
       return res.status(500).json({ mensagem: 'Erro ao atualizar serviço', error: err });
     }
-  }
+}
 
 
 
@@ -126,4 +123,4 @@ export async function getAllServices(req, res) {
       console.log('Error deleting service:', err);
       return res.status(500).json({ mensagem: 'Erro ao deletar serviço', error: err });
     }
-};
+}

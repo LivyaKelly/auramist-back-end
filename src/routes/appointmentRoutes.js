@@ -17,4 +17,5 @@ router.put('/:id', verifyToken, authorizeAppointment, updateAppointment);
 
 router.delete('/:id', verifyToken, authorizeAppointment, deleteAppointment);
 
+
 export default router;

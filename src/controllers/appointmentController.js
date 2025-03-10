@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-// const UPDATE_DEADLINE_MS = 24 * 60 * 60 * 1000;
 
 export async function createAppointment(req, res) {
 
