@@ -10,10 +10,14 @@ import cookieParser from 'cookie-parser';
 import reviewRoutes from './routes/reviewRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import appointmentRoutes from './routes/appointmentRoutes.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile from './swagger-output.json' assert { type: 'json' };
 
 dotenv.config(); 
 
 const app = express();
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(express.json()); 
 app.use(cors({ 
