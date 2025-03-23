@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
@@ -74,7 +77,11 @@ router.post('/login', async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ message: 'Erro no login.', error });
+    console.error("LOGIN ERROR ➡️", error);            
+    res.status(500).json({ 
+      message: 'Erro no login.', 
+      error: error.message || String(error)          
+    });
   }
 });
 

@@ -1,5 +1,6 @@
-import express from 'express';
 import dotenv from 'dotenv';
+dotenv.config(); 
+import express from 'express';
 import cors from 'cors';
 import logger from './middlewares/logger.js'; 
 import verifyToken from './middlewares/verifyToken.js'; 
@@ -10,9 +11,10 @@ import cookieParser from 'cookie-parser';
 import reviewRoutes from './routes/reviewRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import appointmentRoutes from './routes/appointmentRoutes.js';
+import { PrismaClient } from '@prisma/client';
 
-
-dotenv.config(); 
+const router = express.Router();
+const prisma = new PrismaClient();
 
 const app = express();
 
@@ -33,8 +35,28 @@ app.use('/api/services', serviceRoutes);
 app.use('/api/appointments', appointmentRoutes);
 
 
-app.get('/api/protected', verifyToken, (req, res) => {
-  res.json({ message: `Acesso autorizado para o usuário ${req.userId}, função: ${req.userRole}` });
+app.get('/api/protected', verifyToken, async (req, res) =>  {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.userId },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        phone: true,
+        role: true
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+
+    return res.status(200).json(user); 
+  } catch (error) {
+    console.error('Erro ao buscar usuário:', error);
+    return res.status(500).json({ message: 'Erro interno ao buscar usuário' });
+  }
 });
 
 const PORT = process.env.PORT || 3001;

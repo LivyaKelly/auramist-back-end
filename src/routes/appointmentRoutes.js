@@ -3,9 +3,7 @@ import { getAllAppointments, getAppointmentById, createAppointment, updateAppoin
 import { authorizeAppointment } from '../middlewares/authorizeAppointment.js';
 import verifyToken from '../middlewares/verifyToken.js';
 
-
 const router = express.Router();
-
 
 router.get('/', getAllAppointments);
 
