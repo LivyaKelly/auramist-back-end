@@ -11,7 +11,10 @@ import reviewRoutes from './routes/reviewRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import appointmentRoutes from './routes/appointmentRoutes.js';
 import swaggerUi from 'swagger-ui-express';
-import swaggerFile from './swagger-output.json' assert { type: 'json' };
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const swaggerFile = require('../swagger-output.json');
+
 
 dotenv.config(); 
 
