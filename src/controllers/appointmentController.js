@@ -65,23 +65,36 @@ export async function createAppointment(req, res) {
   }
 }
 
-
-
 export async function getAllAppointments(req, res) {
-
   try {
-    const appointments = await prisma.appointment.findMany();
+    const userId = req.userId;
+
+    if (!userId) {
+      return res.status(401).json({ mensagem: 'Usuário não autenticado.' });
+    }
+
+    const appointments = await prisma.appointment.findMany({
+      where: {
+        clientId: userId, // traz apenas os agendamentos do usuário logado
+      },
+      include: {
+        service: true,
+        professional: true,
+      },
+      orderBy: {
+        date: 'asc',
+      },
+    });
+
     return res.status(200).json({
       mensagem: 'Lista de agendamentos',
-      agendamentos: appointments
+      agendamentos: appointments,
     });
   } catch (err) {
     console.log('Error listing appointments:', err);
     return res.status(500).json({ mensagem: 'Erro ao listar agendamentos.', error: err });
   }
 }
-
-
 
 export async function getAppointmentById(req, res) {
   
