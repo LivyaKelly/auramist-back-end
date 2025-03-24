@@ -5,15 +5,30 @@ import verifyToken from '../middlewares/verifyToken.js';
 
 const router = express.Router();
 
-router.get('/', getAllAppointments);
-
-router.get('/:id', getAppointmentById);
-
-router.post('/', verifyToken, authorizeAppointment, createAppointment);
-
-router.put('/:id', verifyToken, authorizeAppointment, updateAppointment);
-
-router.delete('/:id', verifyToken, authorizeAppointment, deleteAppointment);
+router.get('/',
+    // #swagger.tags = ['Agendamentos']
+    getAllAppointments
+  );
+  
+  router.get('/:id',
+    // #swagger.tags = ['Agendamentos']
+    getAppointmentById
+  );
+  
+  router.post('/', verifyToken, authorizeAppointment,
+    // #swagger.tags = ['Agendamentos']
+    createAppointment
+  );
+  
+  router.put('/:id', verifyToken, authorizeAppointment,
+    // #swagger.tags = ['Agendamentos']
+    updateAppointment
+  );
+  
+  router.delete('/:id', verifyToken, authorizeAppointment,
+    // #swagger.tags = ['Agendamentos']
+    deleteAppointment
+  );
 
 
 export default router;

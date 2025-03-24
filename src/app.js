@@ -12,13 +12,18 @@ import reviewRoutes from './routes/reviewRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import appointmentRoutes from './routes/appointmentRoutes.js';
 import { PrismaClient } from '@prisma/client';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './config/swagger-output.json' assert { type: 'json' };
 
 const router = express.Router();
 const prisma = new PrismaClient();
 
 const app = express();
+app.use('/users', userRoutes);
 
 app.use(express.json()); 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.use(cors({ 
   origin: 'http://localhost:3000',  
   credentials: true                 
@@ -62,4 +67,5 @@ app.get('/api/protected', verifyToken, async (req, res) =>  {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log(`Swagger disponível em http://localhost:${PORT}/api-docs`);
 });

@@ -6,17 +6,29 @@ import verifyToken from '../middlewares/verifyToken.js';
 
 const router = express.Router();
 
-
-router.get('/', getAllServices);
-
-router.get('/:id', getServiceById);
-
-router.post('/', verifyToken, authorizeService, uploadImageMiddleware, createService);
-
-router.put('/:id', verifyToken, authorizeService, updateService);
-
-router.delete('/:id', verifyToken, authorizeService, deleteService);
-
-
+router.get('/', 
+    // #swagger.tags = ['Serviços']
+    getAllServices
+  );
+  
+  router.get('/:id', 
+    // #swagger.tags = ['Serviços']
+    getServiceById
+  );
+  
+  router.post('/', verifyToken, authorizeService, uploadImageMiddleware, 
+    // #swagger.tags = ['Serviços']
+    createService
+  );
+  
+  router.put('/:id', verifyToken, authorizeService, 
+    // #swagger.tags = ['Serviços']
+    updateService
+  );
+  
+  router.delete('/:id', verifyToken, authorizeService, 
+    // #swagger.tags = ['Serviços']
+    deleteService
+  );
 
 export default router;

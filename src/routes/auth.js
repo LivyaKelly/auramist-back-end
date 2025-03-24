@@ -11,6 +11,7 @@ const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post('/register', async (req, res) => {
+  // #swagger.tags = ['Autenticação']
   try {
     const { name, email, password, phone, role } = req.body;
 
@@ -49,6 +50,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+    // #swagger.tags = ['Autenticação']
   try {
     const { email, password } = req.body;
 

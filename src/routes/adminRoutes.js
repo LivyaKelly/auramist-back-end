@@ -5,14 +5,20 @@ import { authorizeAdmin } from '../middlewares/authorizeAdmin.js';
 
 const router = express.Router();
 
-
-router.post('/', verifyToken, authorizeAdmin, changeRoleToAdmin);
-
-
-router.get('/', verifyToken, authorizeAdmin, listAdmins);
-
-
-router.delete('/:id', verifyToken, authorizeAdmin, changeRoleFromAdminToClient);
+router.post('/', verifyToken, authorizeAdmin,
+    // #swagger.tags = ['Admin']
+    changeRoleToAdmin
+  );
+  
+  router.get('/', verifyToken, authorizeAdmin,
+    // #swagger.tags = ['Admin']
+    listAdmins
+  );
+  
+  router.delete('/:id', verifyToken, authorizeAdmin,
+    // #swagger.tags = ['Admin']
+    changeRoleFromAdminToClient
+  );
 
 
 export default router;

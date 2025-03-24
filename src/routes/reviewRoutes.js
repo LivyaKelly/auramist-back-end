@@ -6,6 +6,9 @@ const router = express.Router();
 
 router.use(verifyToken);
 
-router.post("/", createReview);
+router.post("/", 
+    // #swagger.tags = ['Avaliações']
+    createReview
+  );
 
 export default router;
