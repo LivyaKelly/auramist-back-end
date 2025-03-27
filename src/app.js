@@ -19,7 +19,7 @@ const router = express.Router();
 const prisma = new PrismaClient();
 
 const app = express();
-app.use('/users', userRoutes);
+
 
 app.use(express.json()); 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

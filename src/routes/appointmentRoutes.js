@@ -2,12 +2,19 @@ import express from 'express';
 import { getAllAppointments, getAppointmentById, createAppointment, updateAppointment, deleteAppointment } from '../controllers/appointmentController.js';
 import { authorizeAppointment } from '../middlewares/authorizeAppointment.js';
 import verifyToken from '../middlewares/verifyToken.js';
+import { getAppointmentsByClient } from '../controllers/appointmentController.js';
+
 
 const router = express.Router();
 
 router.get('/',
     // #swagger.tags = ['Agendamentos']
     getAllAppointments
+  );
+
+  router.get('/client/:clientId', verifyToken,
+    // #swagger.tags = ['Agendamentos']
+    getAppointmentsByClient
   );
   
   router.get('/:id',
