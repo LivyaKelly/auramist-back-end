@@ -11,6 +11,7 @@ import cookieParser from 'cookie-parser';
 import reviewRoutes from './routes/reviewRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import appointmentRoutes from './routes/appointmentRoutes.js';
+import uploadImageRouter from './routes/upload-image.js';
 import { PrismaClient } from '@prisma/client';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './config/swagger-output.json' assert { type: 'json' };
@@ -31,6 +32,7 @@ app.use(cors({
 app.use(cookieParser());           
 app.use(logger);  
 
+app.use('/api/upload-image', uploadImageRouter);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
@@ -38,6 +40,7 @@ app.use('/api/admins', adminRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/appointments', appointmentRoutes);
+
 
 
 app.get('/api/protected', verifyToken, async (req, res) =>  {

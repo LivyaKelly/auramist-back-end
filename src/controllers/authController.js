@@ -37,10 +37,11 @@ export async function register(req, res) {
 
 
         const token = jwt.sign(
-            { userId: user.id, role: user.role },
+            { id: user.id, role: user.role }, // troque userId por id
             JWT_SECRET,
             { expiresIn: '24h' }
-        );
+          );
+          
 
         return res.status(201).json({
             message: 'Usuário registrado com sucesso!',

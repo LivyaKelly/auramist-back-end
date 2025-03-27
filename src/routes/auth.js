@@ -26,7 +26,7 @@ router.post('/register', async (req, res) => {
       data: { name, email, password: hashedPassword, phone, role },
     });
 
-    const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '8h' });
 
     res.cookie('token', token, {
       httpOnly: true,                              
@@ -60,7 +60,7 @@ router.post('/login', async (req, res) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) return res.status(401).json({ message: 'Senha incorreta.' });
 
-    const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: '8h' });
 
     res.cookie('token', token, {
       httpOnly: true,
